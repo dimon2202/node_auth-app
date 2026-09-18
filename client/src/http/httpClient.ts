@@ -8,10 +8,10 @@ export const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use(request => {
-  const acessToken = localStorage.getItem('accessToken')
+  const accessToken = localStorage.getItem('accessToken')
 
-  if (acessToken) {
-    request.headers.Authorization = `Bearer ${acessToken}`;
+  if (accessToken) {
+    request.headers.Authorization = `Bearer ${accessToken}`;
   }
 
   return request;

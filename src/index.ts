@@ -22,6 +22,10 @@ app.use(
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not found' });
+});
+
 async function start() {
   try {
     await sequelize.authenticate();

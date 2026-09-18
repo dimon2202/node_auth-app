@@ -1,4 +1,4 @@
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { usePageError } from '../hooks/usePageError';
 import { useAuth } from '../components/AuthContext';
 import { Formik, Form, Field } from 'formik';
@@ -19,7 +19,6 @@ function validatePassword(value: string) {
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [error, setError] = usePageError('');
   const { login, isChecked, currentUser } = useAuth();
@@ -39,8 +38,7 @@ export const LoginPage = () => {
         onSubmit={({ email, password }) => {
           return login(email, password)
             .then(() => {
-              const state = location.state as { from?: Location };
-              navigate(state.from?.pathname ?? '/');
+              navigate('/profile');
             })
             .catch((error: AxiosError<{ message?: string }>) => {
               setError(error.response?.data?.message ?? '');
@@ -141,7 +139,11 @@ export const LoginPage = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitting || !!errors.email || !!errors.password}
+                disabled={
+                  isSubmitting ||
+                  !!errors.email ||
+                  !!errors.password
+                }
                 className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting ? 'Logging in...' : 'Log in'}

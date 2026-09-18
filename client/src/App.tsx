@@ -14,6 +14,7 @@ import { ProfilePage } from './pages/ProfilePage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { EmailConfirmationPage } from './pages/EmailConfirmationPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 function App() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function App() {
   const handleLogout = () => {
     logout()
       .then(() => {
-        navigate('./login');
+        navigate('/login');
       })
       .catch((error: AxiosError<{ message?: string }>) => {
         setError(error.response?.data?.message ?? '');
@@ -151,6 +152,8 @@ function App() {
               <Route path="users" element={<UsersPage />} />
               <Route path="profile" element={<ProfilePage />} />
             </Route>
+
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
 
           {error && (
