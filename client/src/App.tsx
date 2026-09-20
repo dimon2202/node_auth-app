@@ -148,7 +148,7 @@ function App() {
               element={<EmailConfirmationPage />}
             />
 
-            <Route path="/" element={<RequireAuth />}>
+            <Route element={<RequireAuth />}>
               <Route path="users" element={<UsersPage />} />
               <Route path="profile" element={<ProfilePage />} />
             </Route>

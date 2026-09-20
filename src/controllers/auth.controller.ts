@@ -87,6 +87,12 @@ const login: RequestHandler = async (req, res) => {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
 
+  if (!user.isActive) {
+    return res.status(403).json({
+      message: 'Please activate your email before logging in.',
+    });
+  }
+
   await sendAuthentication(res, user);
 };
 
