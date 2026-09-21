@@ -42,7 +42,7 @@ function sendResetPasswordLink(email: string, resetToken: string) {
 }
 
 function sendEmailChangeConfirmation(email: string, token: string) {
-  const link = `http://localhost:${process.env.PORT}/auth/email-confirmation/${token}`;
+  const link = `${process.env.API_URL}/auth/email-confirmation/${token}`;
 
   const html = `
     <h1>Confirm email change</h1>
