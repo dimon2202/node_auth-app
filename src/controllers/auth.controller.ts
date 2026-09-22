@@ -69,7 +69,7 @@ const activate: RequestHandler = async (req, res) => {
   const user = await userService.getByEmail(email);
 
   if (!user || user.activationToken !== token) {
-    return res.status(404);
+    return res.sendStatus(404);
   }
 
   await userService.activate(email);
